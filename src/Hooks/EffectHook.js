@@ -4,6 +4,7 @@ const EffectHook = () => {
   return (
     <div>
       is this working??
+      another tests
     </div>
   )
 }
