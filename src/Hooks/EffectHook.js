@@ -1,11 +1,17 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 const EffectHook = () => {
+  const [resourceType, setResourceType] = useState('posts')
+
   return (
-    <div>
-      is this working??
-      another tests
-    </div>
+    <>
+      <div>
+        <button onClick={() => setResourceType('posts')}>Posts</button>
+        <button onClick={() => setResourceType('users')}>Users</button>
+        <button onClick={() => setResourceType('comments')}>Comments</button>
+      </div>
+      <h1>{resourceType}</h1>
+    </>
   )
 }
 
