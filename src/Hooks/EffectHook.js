@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 const EffectHook = () => {
   const [resourceType, setResourceType] = useState('posts')
-
+  const [data, setData] = useState([])
   // A basic example of useEffect below, this will run everytime the component renders
   useEffect(() => {
     console.log('This will only run when the components mount')
@@ -19,8 +19,21 @@ const EffectHook = () => {
   useEffect(() => {
     fetch(`https://jsonplaceholder.typicode.com/${resourceType}`)
       .then(response => response.json())
-      .then(json => console.log(json))
+      .then(json => setData(json))
   }, [resourceType])
+  // The data returned from this API is being displayed, noticed if you select the same resourceType nothing will happen thanks to the dependency array checking that nothing has changed so it doesn't need to run its code again.
+
+
+  // The last thing to touch on is useEffect "clean up" this can be seen in the example below starting from the return
+  useEffect(() => {
+    console.log('this will only run when resource type changes')
+
+    return () => {
+      console.log('this is the clean up code')
+    }
+  }, [resourceType])
+  // Whenever this useEffect is ran the code inside the return function will run first before anything else, this is why it can be known as clean up code because you can you use this to clean up anything you might have done the previous time the useEffect had run. 
+  // The clean up code will also run anytime the component is unmounted
 
 
   return (
@@ -31,6 +44,11 @@ const EffectHook = () => {
         <button onClick={() => setResourceType('comments')}>Comments</button>
       </div>
       <h1>{resourceType}</h1>
+      {data?.map((item, i) => {
+        return (
+          <pre key={i}>{JSON.stringify(item)}</pre>
+        )
+      })}
     </>
   )
 }
