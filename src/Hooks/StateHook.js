@@ -43,7 +43,6 @@ const StateHook = () => {
   return (
     <div>
       <h1>USESTATE</h1>
-
       <button onClick={decrementCount}>+</button>
       <span>{count}</span>
       <button onClick={incrementCount}>-</button>
