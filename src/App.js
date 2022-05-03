@@ -7,7 +7,7 @@ import EffectHook from './Hooks/EffectHook'
 function App() {
   return (
     <div className="App">
-      <StateHook />
+      {/* <StateHook /> */}
       <EffectHook />
     </div>
   );
