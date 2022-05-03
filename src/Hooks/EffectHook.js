@@ -13,6 +13,16 @@ const EffectHook = () => {
     console.log('this will only run when resource type changes')
   }, [resourceType])
 
+
+  // In the examples below we are calling an API to return some mock data. We don't want this to run everytime the component is rendered.
+  // Making use of useEffect we can query the API for the different data only when the resourceType changes by adding it to the dependency array.
+  useEffect(() => {
+    fetch(`https://jsonplaceholder.typicode.com/${resourceType}`)
+      .then(response => response.json())
+      .then(json => console.log(json))
+  }, [resourceType])
+
+
   return (
     <>
       <div>
