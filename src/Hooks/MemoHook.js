@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { useMemo, useState, useEffect } from 'react'
 
 const MemoHook = () => {
   const [number, setNumber] = useState(0)
@@ -23,6 +23,19 @@ const MemoHook = () => {
   const doubleNumber = useMemo(() => {
     return slowFunction(number)
   }, [number])
+  // So now we only have to run the slow code only when we need to
+  // One thing to remeber is that over using memo can lead to memory and preformance issues - so only use it when it is actaully needed.
+
+  // Another reason you might want to use useMemo is for referential equality, see below for an example
+  const object = { test: 'hello' }
+  const object2 = { test: 'hello' }
+  // In javascript if we were to compare object and object2 you would think they would be equal because have the same values but in javascript they reference different objects, they have the same value but the reference to the object itself is different
+
+  // in the example below it looks like we are only going to run this conso
+  useEffect(() => {
+    console.log('theme Changed')
+  }, [themeStyle])
+
 
 
   return (
