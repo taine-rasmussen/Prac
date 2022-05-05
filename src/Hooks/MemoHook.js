@@ -31,11 +31,19 @@ const MemoHook = () => {
   const object2 = { test: 'hello' }
   // In javascript if we were to compare object and object2 you would think they would be equal because have the same values but in javascript they reference different objects, they have the same value but the reference to the object itself is different
 
-  // in the example below it looks like we are only going to run this conso
+  // in the example below it looks like we are only going to run this console log ever timeStyle changes however everytime our function is run and the component is reloaded a new themeStyle is created which is references a different places in memory
   useEffect(() => {
     console.log('theme Changed')
   }, [themeStyle])
 
+  // To fix this we can just wrap themeStyle in a memo like we have done below
+  const BetterThemeStyle = useMemo(() => {
+    return {
+      backgroundColor: dark ? 'black' : 'white',
+      color: dark ? 'white' : 'black'
+    }, [dark]
+  })
+  // Now our ThemeStyle will be memoized retaining the same reference across renders and will only run when the state dark is changed
 
 
   return (
